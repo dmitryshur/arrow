@@ -1,4 +1,5 @@
-(function _bezierCubic() {
+const bezier = (function _bezierCubic() {
+  window.$$ = {};
   $$.bezier__cubic__dump = (elem, name = 'Cubic Bezier') => _dumpBezier(name, elem);
   $$.bezier__cubic__getPoint = (elem, t) => _getPoint(elem, t);
   $$.bezier__cubic__getDerivative = (elem, t) => _getDerivative(elem, t);
@@ -349,3 +350,5 @@
     $$.m__normalize({ x: -tao.y, y: tao.x });
   };
 })();
+
+export { bezier };

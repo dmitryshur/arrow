@@ -1,3 +1,5 @@
-const arr = [1, 2, 3];
-const iAmJavascriptES6 = () => console.log(...arr);
-window.iAmJavascriptES6 = iAmJavascriptES6;
+import { bezier } from './bezier_cubic';
+import { mathematics } from './mathematics';
+import { raf } from './requestAnimationFrame';
+import { arrow } from './arrow';
+

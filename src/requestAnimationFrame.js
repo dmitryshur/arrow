@@ -1,4 +1,4 @@
-(function _raf() {
+const raf = (function _raf() {
   const w = window;
   ['ms', 'moz', 'webkit', 'o'].forEach(vendor => {
     if (!w.requestAnimationFrame) {
@@ -21,3 +21,5 @@
     w.cancelAnimationFrame = id => clearTimeout(id);
   }
 })();
+
+export { raf };

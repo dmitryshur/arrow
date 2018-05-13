@@ -1,7 +1,8 @@
-(function _arrow() {
+const arrow = (function _arrow() {
+  console.log($$)
   const _dumpBones = (context, bezier, width) => {
     context.save();
-    context.strokeStyle = '#000';
+    context.strokeStyle = "#000";
     context.beginPath();
     context.moveTo(bezier.p0.x, bezier.p0.y);
     context.bezierCurveTo(
@@ -17,7 +18,7 @@
     const h = Math.min(width * 1.8, len * 0.5);
     const t = $$.bezier__cubic__tByLength(bezier, len - h);
     const pH = $$.bezier__cubic__getPoint(bezier, t);
-    context.fillStyle = '#000';
+    context.fillStyle = "#000";
     context.fillRect(pH.x - 2, pH.y - 2, 4, 4);
     context.restore();
   };
@@ -26,64 +27,64 @@
     const bezierLeft = {
       p0: {
         x: bezier.p0.x,
-        y: bezier.p0.y,
+        y: bezier.p0.y
       },
       p1: {
         x: bezier.p1.x,
-        y: bezier.p1.y,
+        y: bezier.p1.y
       },
       p2: {
         x: bezier.p2.x,
-        y: bezier.p2.y,
+        y: bezier.p2.y
       },
       p3: {
         x: bezier.p3.x,
-        y: bezier.p3.y,
-      },
+        y: bezier.p3.y
+      }
     };
     // поворачиваем первую ручку на A (see http://en.wikipedia.org/wiki/Rotation_matrix for details)
     let dx = bezierLeft.p1.x - bezierLeft.p0.x;
     let dy = bezierLeft.p1.y - bezierLeft.p0.y;
     let dxNew = dx * Math.cos(A) + dy * Math.sin(A);
     let dyNew = -dx * Math.sin(A) + dy * Math.cos(A);
-    //уменьшаем/увеличиваем длину первой ручки в зависимости от кривизны направляющей в начале оси
+    // уменьшаем/увеличиваем длину первой ручки в зависимости от кривизны направляющей в начале оси
     let r = $$.bezier__cubic__bezierCurvature(bezier, 0);
     let L = Math.sqrt(dxNew * dxNew + dyNew * dyNew);
-    //<-- длина ручки
+    // <-- длина ручки
     let e = {
       x: dxNew / L,
-      y: dyNew / L,
+      y: dyNew / L
     };
-    //<-- нормированный вектор ручки
+    // <-- нормированный вектор ручки
     if (r) {
       const gamma = Math.atan(L / Math.abs(r));
-      //<-- угол между вертикалью и направлением на конец ручки
+      // <-- угол между вертикалью и направлением на конец ручки
       const p = Math.abs(r) * Math.sin(gamma);
-      //<-- длина перпендикуляра из начала ручки на направление
+      // <-- длина перпендикуляра из начала ручки на направление
       L = p / Math.cos(gamma + A * $$.m__sign(r));
     }
-    //<-- новая длина ручки
-    //обновляем ручку
+    // <-- новая длина ручки
+    // обновляем ручку
     bezierLeft.p1.x = bezierLeft.p0.x + e.x * L;
     bezierLeft.p1.y = bezierLeft.p0.y + e.y * L;
-    //сдвигаем вторую ручку на width/2 перпердикулярно второй ручке "вверх" (B - угол наклона второй ручки к оси x).
+    // сдвигаем вторую ручку на width/2 перпердикулярно второй ручке "вверх" (B - угол наклона второй ручки к оси x).
     const sinB = (bezierLeft.p2.y - bezierLeft.p3.y) / $$.m__distance(bezierLeft.p3, bezierLeft.p2);
     const cosB = (bezierLeft.p2.x - bezierLeft.p3.x) / $$.m__distance(bezierLeft.p3, bezierLeft.p2);
     bezierLeft.p2.x -= width / 2 * sinB; // <--|
     bezierLeft.p2.y += width / 2 * cosB; // <--| такая комбинация синусов, косинусов и знаков
     bezierLeft.p3.x -= width / 2 * sinB; // <--| так как мы сдвигаем перпендикулярно ручке
     bezierLeft.p3.y += width / 2 * cosB; // <--|
-    //поворачиваем вторую ручку тоже на A
+    // поворачиваем вторую ручку тоже на A
     dx = bezierLeft.p2.x - bezierLeft.p3.x;
     dy = bezierLeft.p2.y - bezierLeft.p3.y;
     dxNew = dx * Math.cos(A) + dy * Math.sin(A);
     dyNew = -dx * Math.sin(A) + dy * Math.cos(A);
-    //уменьшаем/увеличиваем длину второй ручки в зависимости от кривизны направляющей в конце оси
+    // уменьшаем/увеличиваем длину второй ручки в зависимости от кривизны направляющей в конце оси
     r = $$.bezier__cubic__bezierCurvature(bezier, 1);
     L = Math.sqrt(dxNew * dxNew + dyNew * dyNew);
     e = {
       x: dxNew / L,
-      y: dyNew / L,
+      y: dyNew / L
     };
     if (r) {
       const gamma = Math.atan(L / Math.abs(r));
@@ -99,20 +100,20 @@
     const bezierRight = {
       p0: {
         x: bezier.p0.x,
-        y: bezier.p0.y,
+        y: bezier.p0.y
       },
       p1: {
         x: bezier.p1.x,
-        y: bezier.p1.y,
+        y: bezier.p1.y
       },
       p2: {
         x: bezier.p2.x,
-        y: bezier.p2.y,
+        y: bezier.p2.y
       },
       p3: {
         x: bezier.p3.x,
-        y: bezier.p3.y,
-      },
+        y: bezier.p3.y
+      }
     };
 
     // поворачиваем первую ручку на -A
@@ -125,7 +126,7 @@
     let L = Math.sqrt(dxNew * dxNew + dyNew * dyNew);
     let e = {
       x: dxNew / L,
-      y: dyNew / L,
+      y: dyNew / L
     };
     if (r) {
       const gamma = Math.atan(L / Math.abs(r));
@@ -148,12 +149,12 @@
     dy = bezierRight.p2.y - bezierRight.p3.y;
     dxNew = dx * Math.cos(-A) + dy * Math.sin(-A);
     dyNew = -dx * Math.sin(-A) + dy * Math.cos(-A);
-    //уменьшаем/увеличиваем длину второй ручки в зависимости от кривизны направляющей в конце оси
+    // уменьшаем/увеличиваем длину второй ручки в зависимости от кривизны направляющей в конце оси
     r = $$.bezier__cubic__bezierCurvature(bezier, 1);
     L = Math.sqrt(dxNew * dxNew + dyNew * dyNew);
     e = {
       x: dxNew / L,
-      y: dyNew / L,
+      y: dyNew / L
     };
     if (r) {
       const gamma = Math.atan(L / Math.abs(r));
@@ -181,20 +182,20 @@
 
     const p0 = {
       x: bezier.p3.x,
-      y: bezier.p3.y,
+      y: bezier.p3.y
     };
     // Верхушка шляпки
     // "Верхний" угол стрелки - нормированный вектор `e`, умноженный на `l`
     // (длина направляющей шляпки), повернуть на C по часовой
     const pTop = {
       x: p0.x + e.x * l * Math.cos(-C) + e.y * l * Math.sin(-C),
-      y: p0.y - e.x * l * Math.sin(-C) + e.y * l * Math.cos(-C),
+      y: p0.y - e.x * l * Math.sin(-C) + e.y * l * Math.cos(-C)
     };
     // "Нижний" угол стрелки - нормированный вектор `e`, умноженный на `l`
     // (длина направляющей шляпки), повернуть на C против часовой
     const pBottom = {
       x: p0.x + e.x * l * Math.cos(C) + e.y * l * Math.sin(C),
-      y: p0.y - e.x * l * Math.sin(C) + e.y * l * Math.cos(C) + 1,
+      y: p0.y - e.x * l * Math.sin(C) + e.y * l * Math.cos(C) + 1
     };
     // Рассчитаем ручечки для кривой Безье донца шляпки. Возьмем их длиной в одну треть от расстояния
     // между углами стрелки и повернем их на угол D внутрь шляпки.
@@ -204,18 +205,18 @@
     // Первая контрольная точка кривой Безье донца шляпки.
     const p1 = {
       x: pBottom.x + f.x / 3 * Math.cos(-D) + f.y / 3 * Math.sin(-D),
-      y: pBottom.y - f.x / 3 * Math.sin(-D) + f.y / 3 * Math.cos(-D),
+      y: pBottom.y - f.x / 3 * Math.sin(-D) + f.y / 3 * Math.cos(-D)
     };
     // Вторая контрольная точка кривой Безье донца шляпки (1/3 вектора поворачиваем внутрь).
     const p2 = {
       x: pTop.x + -f.x / 3 * Math.cos(D) + -f.y / 3 * Math.sin(D),
-      y: pTop.y - -f.x / 3 * Math.sin(D) + -f.y / 3 * Math.cos(D),
+      y: pTop.y - -f.x / 3 * Math.sin(D) + -f.y / 3 * Math.cos(D)
     };
     const bezierBottom = {
       p0: pBottom,
       p1,
       p2,
-      p3: pTop,
+      p3: pTop
     };
     return bezierBottom;
   };
@@ -387,3 +388,5 @@
     }
   };
 })();
+
+export { arrow };

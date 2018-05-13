@@ -1,6 +1,6 @@
 // mathematics helpers
 
-(function _math() {
+const mathematics = (function _math() {
   const EPS = 1.0e-10;
 
   $$.m__sign = x => {
@@ -69,3 +69,5 @@
     return a;
   };
 })();
+
+export { mathematics };
