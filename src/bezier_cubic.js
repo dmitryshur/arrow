@@ -1,3 +1,5 @@
+import _ from 'underscore';
+
 const bezier = (function _bezierCubic() {
   window.$$ = {};
   $$.bezier__cubic__dump = (elem, name = 'Cubic Bezier') => _dumpBezier(name, elem);

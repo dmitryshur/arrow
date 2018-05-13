@@ -1,5 +1,6 @@
+import $ from 'jquery';
+
 const arrow = (function _arrow() {
-  console.log($$)
   const _dumpBones = (context, bezier, width) => {
     context.save();
     context.strokeStyle = "#000";

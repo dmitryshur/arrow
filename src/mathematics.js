@@ -25,7 +25,7 @@ const mathematics = (function _math() {
   $$.m__distance = (p0, p1) => $$.m__len($$.m__sub(p1, p0));
 
   $$.m__normalize = v => {
-    yLen = $$.m__len(v);
+    const yLen = $$.m__len(v);
     return { x: v.x / yLen, y: v.y / yLen };
   };
 
