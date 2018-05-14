@@ -31,4 +31,4 @@ const bezierCurve = {
   }
 };
 
-$$.animateArrow(canvas.getContext("2d"), bezierCurve, 4, arrow_color, 2000);
+$$.animateArrow(canvas.getContext("2d"), bezierCurve, 10, arrow_color, 500);
